@@ -123,6 +123,54 @@ public static int friendParing ( int n ) {
 if ( n == 1 || n ==2 ) return n;
 return friendParing(n-1) + (n-1)* friendParing(n-2);
 }
+public static void mergesort( int nums[] , int si , int ei ) {
+    //Base case
+    if ( si >= ei ) return ;
+
+ int mid = si + ( ei-si)/2;
+    //Left part 
+    mergesort( nums , si , mid);
+ //Right part
+ mergesort(nums , mid+1 , ei );
+ merge(nums , si , mid  , ei );
+
+}
+public static void merge( int nums[] , int si , int mid , int ei ) {
+    int temp[]= new int [ei-si+1];
+    int i = si ;
+    int j = mid+1;
+    int k =0;
+
+    while ( i <=mid && j<=ei) {
+        if ( nums[i] < nums[j]) {
+            temp[k++] = nums[i++];
+        }else {
+            temp[k++] = nums[j++];
+        }
+    }
+
+    // left over
+    while ( i <= mid) {
+        temp[k++] = nums[i++];
+    }
+//left over - right parrt
+while ( j <= ei ) {
+    temp[k++] = nums[j++];
+}
+
+
+//temp to copy 
+
+for(  k =0, i =si ; k < temp.length ; k++ , i++) {
+    nums[i] =temp[k];
+}
+
+}
+public static void printmerge( int nums[]) {
+    for ( int  i = 0 ; i< nums.length ; i++) {
+        System.out.print(nums[i] + " ");
+    }
+}
     public static void main (String args[]) {
         Scanner sc = new Scanner(System.in);
         // int n= sc.nextInt();
@@ -138,7 +186,10 @@ return friendParing(n-1) + (n-1)* friendParing(n-2);
         // System.out.println(RomantoInt(s));
         // String str = "appnacollege";
         // removedublicate(str, 0 ,new StringBuilder("") , new boolean[26]);
-        System.out.println(friendParing(5));
+        // System.out.println(friendParing(5));
+        int nums[] = { 3,7 , 47 ,-2 , 9 , 8};
+      mergesort(nums, 0, nums.length-1);
+      printmerge(nums);
         sc.close();
 
     }

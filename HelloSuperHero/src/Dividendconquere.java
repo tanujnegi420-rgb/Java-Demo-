@@ -55,9 +55,42 @@ public class Dividendconquere {
         System.out.print(num[i] + " ");
         }
     }
+
+    public static void quicksort ( int nums[] , int si , int ei ) {
+        if ( si >= ei ) {
+            return ;
+
+        }
+         
+        //last element 
+        int pidx = partition (nums , si , ei );
+
+        //left part 
+        quicksort(nums, si, pidx-1);
+        //Right part 
+        quicksort(nums, pidx+1, ei);
+    }
+    public static int partition ( int nums[] , int si , int ei) {
+        int pivot = nums[ei];
+        int i = si-1;
+        
+        for ( int j = si ; j < ei ; j ++) {
+            if( nums[j] <= pivot) {
+                i++;
+                int temp = nums[j];
+                nums[j] = nums[i];
+                nums[i] = temp;
+            }
+        }
+        i++;
+        int temp = pivot ;
+        nums[ei] = nums[i];
+        nums[i] =temp;
+        return i;
+    }
     public static void main ( String args[]) {
         int nums[] = { 6 , 3, 9 , 5, 2, 8 };
-      mergesort(nums, 0, nums.length-1);
+      quicksort(nums, 0, nums.length-1);
       Printnum(nums);
        
 
