@@ -88,9 +88,73 @@ public class Dividendconquere {
         nums[i] =temp;
         return i;
     }
+
+    //quick sort optimized Way to solve okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+
+
+    public static void QuickSortoptimized( int nums[] , int si , int ei ) {
+        //Base case
+        if ( si>= ei ) {
+            return ;
+        }
+
+        //median of three
+        median( nums , si , ei );
+
+        /// Parition 
+        int pidx = partitionOptimized(nums, si, ei) ;
+
+
+        //quick sort for left 
+            QuickSortoptimized(nums, si, pidx-1);
+
+        // Quick sort for right 
+        quicksort(nums, pidx+1, ei);
+    }
+    public static void median ( int nums[] , int si , int ei ) {
+        int mid = si + ( ei - si )/2;
+
+        //swap
+
+        if ( nums[si] > nums[mid]) {
+            swap(nums , si , mid);
+        }
+        if ( nums[si] > nums[ei]) {
+            swap(nums , si , ei );
+        }
+        if ( nums[mid] > nums[ei]) {
+            swap ( nums , mid , ei );
+        }
+
+
+
+        //Swap for right side is largest to pivot we don't need to check than right so we right this 
+        swap( nums , mid , ei-1);
+    }
+    public static void swap( int nums[] , int i , int j ) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+
+    }
+    public static int partitionOptimized ( int nums[] , int si , int ei ) {
+        int pivot = nums[ei-1];
+        int i = si-1;
+    
+        for ( int j = si ; j < ei-1 ; j++) {
+            if ( nums[j] < pivot ) {
+             i++;
+             swap(nums , i , j);
+
+            }
+
+        }
+        i++;
+        swap(nums, i , ei-1);return i;
+    }
     public static void main ( String args[]) {
-        int nums[] = { 6 , 3, 9 , 5, 2, 8 };
-      quicksort(nums, 0, nums.length-1);
+        int nums[] = { 1 , 2 ,3,4 , 5 ,6, 7  };
+     partitionOptimized(nums, 0, nums.length-1);
       Printnum(nums);
        
 
