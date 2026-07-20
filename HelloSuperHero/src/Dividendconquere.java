@@ -152,10 +152,95 @@ public class Dividendconquere {
         i++;
         swap(nums, i , ei-1);return i;
     }
+
+    public static int searchrotatedarray ( int nums[] , int target ) {
+        int si = 0 ;
+         int ei = nums.length-1;
+         while (si <= ei ) {
+            int mid = si+ ( ei -si )/2;
+            if ( nums[mid] == target) {
+                return mid;
+            }
+
+            if ( nums[si] <= nums[mid]) {
+                if ( nums[si] <= target && target < nums[mid]) {
+                    ei = mid-1;
+
+                }else {
+                    si = mid+1;
+                }
+            }else {
+                if ( nums[mid] < target && target <= nums[ei]) {
+                    si = mid+1;
+
+                }else {
+                    ei = mid-1;
+                }
+                }
+            }
+            return -1;
+
+         }
+
+
+
+
+
+         ///Apply merge sort ot sort an array of String 
+         public static void mergestring(String str[] , int si , int ei ) {
+            if ( si>= ei ) {
+                return ;
+            }
+            int mid = si + ( ei - si )/2;
+            mergestring(str, si, mid);
+            mergestring(str , mid+1 , ei );
+            stringmerge(str , si , mid, ei ) ;
+         }
+         public static void stringmerge(String str[] , int si , int mid , int ei ) {
+            String temp[] = new String[ei-si+1];
+            int  i = si;
+            int j = mid+1;
+            int k = 0;
+
+            while ( i <= mid && j <= ei) {
+                if (str[i].compareTo((str[j]) )<= 0) {
+                    temp[k++] = str[i++];
+                }else{
+                    temp[k++] = str[j++];
+                }
+            }
+            while ( i <= mid) {
+                temp[k++] = str[i++];
+
+            }
+            while(j <=ei) {
+                temp[k++] = str[j++];
+            }
+
+
+            for ( k = 0  , i = si ; k < temp.length ; k++ , i++) {
+                str[i] = temp[k];
+
+            }
+         }
+         public static void printstring(String str[]) {
+        
+            for ( String s : str) {
+                System.out.print(s + " ");
+            }
+            System.out.println();
+         }
+    
     public static void main ( String args[]) {
-        int nums[] = { 1 , 2 ,3,4 , 5 ,6, 7  };
-     partitionOptimized(nums, 0, nums.length-1);
-      Printnum(nums);
+        // int nums[] = { 4 ,5  , 6 ,7 , 1 ,2 ,3  };
+        // int target = 7;
+        // System.out.println(searchrotatedarray(nums, target));
+    //  partitionOptimized(nums, 0, nums.length-1);
+    //   Printnum(nums);
+
+    String str[] = {"sun" ,"earth" , "mars" , "mercury" };
+    mergestring(str, 0, str.length-1);
+    printstring(str);
        
 
     }
